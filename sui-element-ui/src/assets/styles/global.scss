@@ -1,0 +1,234 @@
+.front-page {
+  background: #E9EAED;
+  height: 100vh;
+  overflow-y: auto
+}
+
+.front-body {
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  background: white;
+  width: 1200px;
+  margin: 0px auto;
+  padding-top: 60px;
+  min-height: 100%;
+}
+
+.front-card {
+  min-height: 820px;
+}
+
+.front-card {
+  min-height: 820px;
+}
+
+.front-card .article-title {
+  font-size: 22px;
+  text-align: center
+}
+
+.front-card .article-time {
+  display: block;
+  font-size: small;
+  margin-top: 20px;
+  text-align: center;
+  color: #999
+}
+
+.front-card .article-image {
+  border-radius: 5px;
+  margin: 10px auto;
+  display: block;
+  width: 500px;
+  height: 300px;
+}
+
+@import '../styles/theme';
+//系统样式
+.el-menu-item {
+  background: $theme-admin-color !important;
+}
+
+.el-menu-item:hover {
+  background: $theme-admin-95-color !important;
+}
+
+.el-submenu__title {
+  background: $theme-admin-90-color !important;
+}
+
+.el-submenu__title:hover {
+  background: $theme-admin-85-color !important;
+}
+
+.el-menu--collapse .el-menu .el-submenu, .el-menu--popup {
+  min-width: 100px !important;
+  background-color: $theme-admin-color !important;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.el-loading-mask {
+  z-index: 1000;
+}
+
+.vue-contextmenu-listWrapper {
+  padding: 0px !important;
+}
+
+.context-menu-list {
+  padding: 8px 5px !important;
+}
+
+.context-menu-list:hover {
+  background: #eeeeee !important;
+}
+
+.nav-name-right {
+  margin: 0 10px !important;
+  line-height: 10px !important;
+}
+
+//滚动条样式
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px
+}
+
+::-webkit-scrollbar-track {
+  background-color: #e8f4ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(76, 135, 188, 0.91);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(76, 135, 188, 0.71)
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: rgba(76, 135, 188, 0.71)
+}
+
+.float-r {
+  float: right;
+}
+
+.float-l {
+  float: left;
+}
+
+.sui-empty {
+  margin-top: 150px
+}
+
+.sui-input {
+  width: 229px !important;
+  line-height: 0
+}
+
+.sui-textarea {
+  margin: 0;
+  max-width:780px;
+}
+
+.sui-editor-item {
+  max-width: 900px;
+  height: 360px
+}
+
+.hidden {
+  display: none !important;
+}
+
+.pagination {
+  margin-top: 10px;
+}
+
+.column-image {
+  border-radius: 5px;
+  vertical-align: middle;
+  width: 25px;
+  height: 25px
+}
+
+//附件列表
+.el-upload-list--picture-card .el-upload-list__item {
+  width: 150px;
+  height: 150px;
+}
+
+.edit-form {
+  padding-right: 10px;
+  max-height: 600px;
+  overflow-y: auto
+}
+
+.edit-page {
+  height: 800px;
+  overflow-y: auto
+}
+
+//重置样式
+.el-textarea__inner {
+  min-height: 100px !important;
+}
+
+//矫正el-cascader高度
+.el-cascader .el-input--medium .el-input__inner {
+  height: 40px !important;
+  line-height: 40px !important;
+}
+
+.avatar {
+  width: 100px !important;
+  height: 100px !important;
+}
+
+.avatar-uploader-icon {
+  width: 100px !important;
+  height: 100px !important;
+  line-height: 100px !important;
+}
+
+//其他通用样式
+.font-overflow {
+  //width:800px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.font-overflow-2 {
+  //width: 800px;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 这里是超出几行省略 */
+  overflow: hidden;
+}
+
+.font-break {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.font-shadow {
+  text-shadow: 1px 1px 3px rgba(43, 74, 120, 0.61);
+}
+
+.div-shadow {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.47)
+}
+
+//居中显示
+.position-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icss.sys.base.module.gen.dao.GenOracleDao">
+    <!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+    <!--  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />-->
+    <!--  <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    <sql id="genColumns">
+        b.comments AS comments,
+        a.table_name AS tableName,
+        a.table_name AS id
+    </sql>
+
+
+    <select id="getCloums" resultType="gen">
+        SELECT t.table_name  as tableName,-- 表名,
+               t.column_name as columnName,--  字段名,
+                --t.data_type || '(' || t.data_length || ')' as columnType, 字段长度和类型,
+               upper(t.data_type) as columnType,--字段类型,
+               t.data_length as columnLength,-- 字段长度,
+               t1.comments   as columnDescribe--字段说明
+        FROM user_tab_cols t,
+             user_col_comments t1
+        WHERE t.table_name = t1.table_name
+          AND t.column_name = t1.column_name
+          AND upper(t.table_name) = upper(#{tableName})
+    </select>
+
+    <select id="findList" resultType="gen">
+        SELECT
+        <include refid="genColumns"/>
+        FROM user_tables a, user_tab_comments b
+        <where>
+            (b.table_name like '%HT%' or  b.table_name like '%WX%' or b.table_name like '%SYS%')
+            and a.TABLE_NAME = b.TABLE_NAME
+            <if test="comments != null and comments != ''">
+                AND t.comments = #{comments}
+            </if>
+            <if test="tableName != null and tableName != ''">
+                AND  UPPER(a.table_name) LIKE '%' || UPPER(#{tableName}) || '%'
+            </if>
+            <if test="id != null and id != ''">
+                AND t.id = #{id}
+            </if>
+        </where>
+    </select>
+
+</mapper>

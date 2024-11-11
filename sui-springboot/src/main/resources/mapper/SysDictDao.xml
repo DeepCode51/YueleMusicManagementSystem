@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icss.sys.base.module.dict.dao.SysDictDao">
+    <!--获取数据字典编码对应的文本-->
+    <select id="findLabelByDictCode" resultType="String">
+        SELECT label from sys_dict where pid=(select id from sys_dict where value =#{dictType})
+        <if test="value != null and value != ''">
+            AND value=#{value}
+        </if>
+    </select>
+    <!--获取数据字典编码对应的文本值-->
+    <select id="findValueByDictCode" resultType="String">
+        SELECT value from sys_dict where pid=(select id from sys_dict where value =#{dictType})
+        <if test="label != null and label != ''">
+            AND label=#{label}
+        </if>
+    </select>
+
+    <!--获取菜单树-->
+    <select id="getDictTree" resultType="dictTree">
+        select id,
+        pid as pid,
+        value as code,
+        concat(sort,'、',label,'【',value,'】') as name
+        from sys_dict t
+        <where>
+            <if test="pid != null and pid != ''">
+                AND t.pid = #{pid}
+            </if>
+            <if test="type != null and type != ''">
+                AND t.type = #{type}
+            </if>
+        </where>
+        order by t.sort,t.create_date desc
+    </select>
+
+
+    <!--获取菜单树-->
+    <select id="findListByDictCode" resultType="sysDict">
+        SELECT * from sys_dict where pid=(select id from sys_dict where value =#{dictType})
+        <if test="value != null and value != ''">
+            AND value=#{value}
+        </if>
+        order by create_date DESC sort
+    </select>
+
+</mapper>

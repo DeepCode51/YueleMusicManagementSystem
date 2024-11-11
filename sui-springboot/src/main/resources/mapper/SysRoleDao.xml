@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icss.sys.base.module.role.dao.SysRoleDao" >
+    <!--删除角色对应权限-->
+    <delete id="deleteMenusByRoleId">
+        DELETE FROM sys_role_menu
+        WHERE role_id = #{roleId}
+    </delete>
+
+    <!--根据查询用户配置的角色-->
+    <select id="findCheckedRolesByUserId" resultType="sysRole">
+        select id,role_code,
+        (select count(*) from sys_user_role where user_id = #{userId} and role_id =t.id) as checked,
+        role_name
+        from sys_role t
+        <where>
+            <if test="delFlag">
+                AND t.del_flag = 0
+            </if>
+        </where>
+        ORDER BY t.update_date DESC
+    </select>
+
+    <select id="findRolesListByUserId" resultType="sysRole">
+       	select sr.* from sys_user_role sur
+	    left join sys_role sr on sr.id = sur.role_id
+	    where sur.user_id=#{userId}
+	    ORDER BY sr.update_date DESC
+    </select>
+
+</mapper>

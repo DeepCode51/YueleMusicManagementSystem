@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icss.sys.base.module.menu.dao.SysMenuDao" >
+
+    <!--获取用户菜单树-->
+    <select id="getMenuUserTree" resultType="sysMenu">
+        select DISTINCT m.id as id,m.pid,m.name,m.component,m.icon,m.href,m.is_show,m.sort,m.update_date from sys_user_role ur
+        LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id
+        LEFT JOIN sys_menu m on rm.menu_id = m.id
+        <where>
+            <if test="pid != null and pid != ''">
+                AND m.pid = #{pid}
+            </if>
+            <if test="userId != null and userId != ''">
+                AND ur.user_id = #{userId}
+            </if>
+        </where>
+        ORDER BY m.sort,m.name ASC
+    </select>
+
+    <!--获取角色菜单树-->
+    <select id="getMenuRoleTree" resultType="menuRoleTree">
+        select id,
+        (select count(*) from sys_role_menu
+        where 1=1
+        <if test="roleId != null and roleId != ''">
+            and role_id = #{roleId}
+        </if>
+        and menu_id =t.id) as checked,
+        name as label,
+        name,
+        href
+        from sys_menu t
+        <where>
+            t.del_flag = 0
+            <if test="pid != null and pid != ''">
+                AND t.pid = #{pid}
+            </if>
+        </where>
+        order by t.sort
+    </select>
+
+    <!--    获取角色权限-->
+    <select id="findPermissionsByUserId" resultType="sysMenu">
+        select * from (
+            SELECT DISTINCT m.id,m.name,m.permission
+            FROM sys_user_role ur
+                LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
+                LEFT JOIN sys_menu m ON rm.menu_id = m.id
+            WHERE ur.user_id = #{userId}
+        )A where permission is not null
+    </select>
+
+    <!--删除角色对应权限-->
+    <delete id="deleteMenusByRoleId">
+        DELETE FROM sys_role_menu
+        WHERE role_id = #{roleId}
+    </delete>
+
+</mapper>

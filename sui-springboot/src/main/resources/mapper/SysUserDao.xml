@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icss.dao.SysUserDao">
+
+    <!--自定义分页查询-->
+    <select id="findByPage" resultType="sysUser">
+       select * from (
+            select sur.role_id,sr.role_code,sr.role_name,su.* from sys_user su
+            left join sys_user_role sur on su.id = sur.user_id
+            left join sys_role sr on sr.id = sur.role_id
+            order by sr.role_name
+        ) A
+        ${ew.customSqlSegment}
+    </select>
+    <!--自定义列表查询-->
+    <select id="findList" resultType="sysUser">
+        select * from (
+            select sur.role_id,sr.role_code,sr.role_name,su.* from sys_user su
+            left join sys_user_role sur on su.id = sur.user_id
+            left join sys_role sr on sr.id = sur.role_id
+            order by sr.role_name
+        ) A
+        ${ew.customSqlSegment}
+    </select>
+
+</mapper>

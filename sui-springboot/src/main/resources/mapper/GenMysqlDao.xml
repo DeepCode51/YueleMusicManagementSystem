@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icss.sys.base.module.gen.dao.GenMysqlDao">
+
+    <sql id="genColumns">
+        t.table_comment AS comments,
+        t.table_name AS tableName,
+        t.table_name AS id
+    </sql>
+
+
+    <select id="getCloums" resultType="gen">
+        SELECT
+            CONCAT(CONCAT(CONCAT(t.table_name), ':'), t.column_name)                              AS column_id,
+            t.table_name                                                                          AS tableName,
+            t.column_key                                                                          AS columnKey,
+            t.column_name                                                                         AS columnName,
+            lower(t.data_type)                                                                    AS columnType,
+            t.character_maximum_length                                                            AS columnLength,
+            t.column_comment                                                                      AS columnDescribe
+        FROM information_schema.columns t
+        WHERE t.TABLE_SCHEMA = (SELECT database()) AND t.table_name = #{tableName};
+    </select>
+
+
+    <!--根据查询条件获取业务信息字段列表数据-->
+    <select id="findColumnList" resultType="genTableColumn">
+        SELECT
+            A.column_id         AS id,
+            A.tableName,
+            LOWER(A.columnName) AS columnName,
+            A.columnType        AS columnDateType,
+            A.columnDescribe    AS columnDesc,
+            B.table_desc,
+            B.input_type,
+            B.query_type,
+            B.dict_type,
+            B.associate_type,
+            B.is_unique,
+            B.is_hidden,
+            B.is_pk,
+            B.is_show,
+            B.sort
+        FROM
+            (SELECT
+                 CONCAT(CONCAT(CONCAT(t.table_name), ':'), t.column_name)                              AS column_id,
+                 t.table_name                                                                          AS tableName,
+                 t.column_key                                                                          AS columnKey,
+                 t.column_name                                                                         AS columnName,
+                 t.data_type                                                                           AS columnType,
+                 t.character_maximum_length                                                            AS columnLength,
+                 t.column_comment                                                                      AS columnDescribe
+             FROM information_schema.columns t
+             WHERE t.TABLE_SCHEMA = (SELECT database()) AND t.table_name = #{tableName}) A LEFT JOIN
+            (SELECT *
+             FROM sys_column) B
+                ON A.column_id = B.id
+--         ORDER BY B.sort
+    </select>
+
+    <select id="findList" resultType="gen">
+        SELECT
+        <include refid="genColumns"/>
+        FROM information_schema.TABLES t
+        <where>
+            TABLE_SCHEMA =#{dbName}
+             AND t.table_name NOT LIKE CONCAT(CONCAT('%', 'sys_'), '%')
+            <if test="comments != null and comments != ''">
+                AND t.table_comment = #{comments}
+            </if>
+            <if test="tableName != null and tableName != ''">
+                AND t.table_name = #{tableName}
+            </if>
+            <if test="id != null and id != ''">
+                AND t.id = #{id}
+            </if>
+        </where>
+        order by t.create_time desc,t.table_name
+    </select>
+
+    <select id="get" resultType="gen">
+        SELECT
+        <include refid="genColumns"/>
+        FROM sys_column t
+        <where>
+            <if test="tableName != null and tableName != ''">
+                AND t.table_name = #{tableName}
+            </if>
+        </where>
+        order by t.table_name
+    </select>
+
+
+    <!--新增业务信息字段数据-->
+    <insert id="insert">
+        INSERT INTO sys_column
+        (
+            id,
+            table_name,
+            table_desc,
+            column_name,
+            column_desc,
+            input_type,
+            query_type,
+            dict_type,
+            associate_type,
+            is_hidden,
+            is_unique,
+            is_pk,
+            is_show,
+            sort,
+            create_by,
+            create_date,
+            update_by,
+            update_date,
+            remarks,
+            del_flag
+        )
+        VALUES
+            (
+                #{id},
+                #{tableName},
+                #{tableDesc},
+                #{columnName},
+                #{columnDesc},
+                #{inputType},
+                #{queryType},
+                #{dictType},
+                #{associateType},
+                #{isHidden},
+                #{isUnique},
+                #{isPk},
+                #{isShow},
+                #{sort},
+                #{createBy},
+                #{createDate},
+                #{updateBy},
+                #{updateDate},
+                #{remarks},
+                #{delFlag}
+            )
+    </insert>
+
+    <!--删除业务信息字段数据-->
+    <delete id="deleteByTableName">
+        DELETE FROM sys_column
+        WHERE table_name = #{tableName}
+    </delete>
+
+
+</mapper>

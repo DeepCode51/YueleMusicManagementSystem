@@ -1,0 +1,2 @@
+webpackJsonp([6],{"S/3p":function(e,t,a){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n={render:function(){var e=this.$createElement;return(this._self._c||e)("div",{staticClass:"home",staticStyle:{"background-image":"url('static/images/home/home.jpg')"}})},staticRenderFns:[]};var s=a("VU/8")({name:"home"},n,!1,function(e){a("v8GZ")},"data-v-4e34ed12",null);t.default=s.exports},v8GZ:function(e,t){}});
+//# sourceMappingURL=6.8e89bfc5589f3b672c0d.js.map

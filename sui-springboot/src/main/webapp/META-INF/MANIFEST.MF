@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Main-Class: SpringBootApp
+Class-Path: tomcat-embed-websocket-9.0.50.jar commons-logging-1.1.1.jar 
+ tomcat-embed-el-9.0.50.jar spring-boot-starter-json-2.5.3.jar spring-we
+ b-5.3.9.jar spring-boot-starter-jdbc-2.5.3.jar jakarta.annotation-api-1
+ .3.5.jar spring-boot-autoconfigure-2.5.3.jar snakeyaml-1.28.jar mybatis
+ -plus-extension-3.4.3.1.jar freemarker-2.3.31.jar mybatis-plus-annotati
+ on-3.4.3.1.jar jsqlparser-0.9.5.jar jackson-annotations-2.12.4.jar comm
+ ons-beanutils-1.8.0.jar jackson-datatype-jsr310-2.12.4.jar commons-lang
+ 3-3.8.1.jar spring-core-5.3.9.jar spring-jdbc-5.3.9.jar spring-boot-2.5
+ .3.jar tomcat-annotations-api-9.0.50.jar spring-boot-starter-web-2.5.3.
+ jar mybatis-spring-boot-starter-2.2.0.jar spring-expression-5.3.9.jar m
+ ybatis-3.5.7.jar spring-aop-5.3.9.jar slf4j-api-1.7.32.jar log4j-api-2.
+ 14.1.jar ezmorph-1.0.6.jar json-lib-2.4-jdk15.jar spring-webmvc-5.3.9.j
+ ar mybatis-plus-core-3.4.3.1.jar mysql-connector-java-8.0.26.jar logbac
+ k-classic-1.2.4.jar spring-context-5.3.9.jar jackson-databind-2.12.4.ja
+ r spring-boot-starter-tomcat-2.5.3.jar mybatis-plus-boot-starter-3.4.3.
+ 1.jar jackson-datatype-jdk8-2.12.4.jar spring-boot-starter-2.5.3.jar my
+ batis-spring-boot-autoconfigure-2.2.0.jar spring-boot-starter-logging-2
+ .5.3.jar commons-collections-3.2.1.jar mybatis-plus-3.4.3.1.jar spring-
+ beans-5.3.9.jar logback-core-1.2.4.jar spring-tx-5.3.9.jar mybatis-spri
+ ng-2.0.6.jar log4j-to-slf4j-2.14.1.jar spring-jcl-5.3.9.jar commons-lan
+ g-2.5.jar jackson-core-2.12.4.jar jackson-module-parameter-names-2.12.4
+ .jar jul-to-slf4j-1.7.32.jar pagehelper-4.1.4.jar tomcat-embed-core-9.0
+ .50.jar HikariCP-4.0.3.jar
+

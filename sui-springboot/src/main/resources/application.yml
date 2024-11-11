@@ -1,0 +1,52 @@
+server:
+  port: 8090
+  servlet:
+    session:
+      timeout: PT24H
+#      context-path: /sui-springboot
+spring:
+#  指定环境
+#  profiles:
+#    active: prod
+  main:
+    allow-circular-references: true
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  cache:
+    ehcache:
+      config: classpath:config/ehcache.xml
+  application:
+    name: dept
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource            # 当前数据源操作类型
+    driver-class-name: com.mysql.cj.jdbc.Driver             # mysql驱动包
+    url: jdbc:mysql://localhost:3306/graduation_297_wanghaobo?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    dbcp2:
+      min-idle: 5                                           # 数据库连接池的最小维持连接数
+      initial-size: 5                                       # 初始化连接数
+      max-total: 5                                          # 最大连接数
+      max-wait-millis: 200
+mybatis-plus:
+  #xml位置
+  mapperLocations: classpath:mapper/*.xml
+  #别名实体包
+  typeAliasesPackage: com.icss.entity,com.icss.sys.**.entity,com.icss.sys.**.dto,com.icss.sys.**.dto
+  configuration:
+    #驼峰命名
+    map-underscore-to-camel-case: true
+logging:
+  file:
+    path: logs/files
+  level:
+    #基础包
+    com: debug
+    #指定报的日志级别
+    org.springframework: warn
